@@ -31,7 +31,7 @@ This is an early release of an experimental package.
 ## Installation
 
 For a semi-manual installation you can first create a local clone
-if the repository:
+of the repository:
 
 ```bash
 git clone https://github.com/komascript/scrlayer-fancyhdr.git
@@ -43,11 +43,19 @@ Then enter the directory created while cloning the repository:
 cd scrlayer-fancyhdr
 ```
 
-Last, but not least use `l3build` to install it locally:
+Last, but not least use `l3build` to install it locally with manual and
+sources:
+
+```bash
+l3build install --full
+```
+
+or without manual and sources:
 
 ```bash
 l3build install
 ```
+
 
 ------------------------------------------------------------------------------
 

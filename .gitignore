@@ -12,6 +12,11 @@
 *.cb2
 .*.lb
 
+## specific l3build files and folders
+build
+*-ctan.zip
+scrlayer-fancyhdr.pdf
+
 ## Intermediate documents:
 *.dvi
 *.xdv

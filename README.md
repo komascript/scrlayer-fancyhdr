@@ -1,4 +1,4 @@
-# scrlayer-fancyhdr — combining [fancyhdr](https://www.ctan.org/pkg/fancyhdr) with [KOMA-Script](https://www.ctan.org/pkg/koma-script)'s [scrlayer](https://www.ctan.org/pkg/scrlayer)
+# `scrlayer-fancyhdr` — combining [`fancyhdr`](https://www.ctan.org/pkg/fancyhdr) with [KOMA-Script](https://www.ctan.org/pkg/koma-script)'s [`scrlayer`](https://www.ctan.org/pkg/scrlayer)
 
 ------------------------------------------------------------------------------
 
@@ -11,6 +11,18 @@ CTAN Location: https://ctan.org/pkg/scrlayer-fancyhdr
 ------------------------------------------------------------------------------
 
 ## Summary
+
+`scrlayer-fancyhdr` is a LaTeX package, that uses
+[KOMA-Script](https://www.ctan.org/pkg/koma-script)'s
+[`scrlayer`](https://www.ctan.org/pkg/scrlayer) to redefine the page styles of
+package [`fancyhdr`](https://www.ctan.org/pkg/fancyhdr).  This allows the
+combination of features of `fancyhdr` with features of `scrlayer`.
+
+Before KOMA-Script v3.33 `scrlayer-fancyhdr` was part of KOMA-Script itself.
+It still depends on KOMA-Script package
+[`scrlayer`](https://www.ctan.org/pkg/scrlayer) at least version 3.33.  It
+also depends on [`fancyhdr`](https://www.ctan.org/pkg/fancyhdr). Currently
+version 3 and 4 up to 4.0.1 are supported and tested.
 
 ## Status
 

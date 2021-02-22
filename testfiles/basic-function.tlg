@@ -1,0 +1,16 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: basic-function: report used fancyhdr elements and scrlayer layers
+============================================================
+fancyhdr element `OLH' used
+fancyhdr element `OCH' used
+fancyhdr element `ORH' used
+Layer `background' is used
+fancyhdr element `OLF' used
+fancyhdr element `OCF' used
+fancyhdr element `ORF' used
+Layer `foreground' is used
+[1
+]
+============================================================

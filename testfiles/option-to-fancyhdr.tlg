@@ -1,0 +1,20 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: option to fancyhdr: headings
+============================================================
+headings (f@nch@fancycore) is a scrlayer pagestyle
+headings (f@nch@fancycore) is a scrlayer pagestyle
+============================================================
+============================================================
+TEST 2: option to fancyhdr: myheadings
+============================================================
+myheadings (f@nch@fancycore) is a scrlayer pagestyle
+myheadings (f@nch@fancycore) is a scrlayer pagestyle
+============================================================
+============================================================
+TEST 3: option to fancyhdr: (empty)
+============================================================
+empty is a scrlayer pagestyle
+empty is a scrlayer pagestyle
+============================================================

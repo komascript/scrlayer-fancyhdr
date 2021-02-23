@@ -1,0 +1,40 @@
+\input regression-test.tex
+\documentclass[twoside]{article}
+
+\makeatletter
+\def\ps@headings{\TYPE{headings is not a scrlayer pagestyle}}
+\def\ps@myheadings{\TYPE{myheadings is not a scrlayer pagestyle}}
+\def\ps@empty{\TYPE{empty is not a scrlayer pagestyle}}
+\makeatother
+
+\usepackage[headings,myheadings]{scrlayer-fancyhdr}
+
+\KOMAoptions{%
+  onpsselect={%
+    \TYPE{%
+      \toplevelpagestyle\space%
+      \ifx\currentpagestyle\toplevelpagestyle\else (\currentpagestyle) \fi
+      is a scrlayer pagestyle%
+    }%
+  }%
+}
+
+\START
+\TEST{option to fancyhdr: headings}{%
+  \pagestyle{headings}%
+}
+\TEST{option to fancyhdr: myheadings}{%
+  \pagestyle{myheadings}
+}
+\TEST{option to fancyhdr: (empty)}{%
+  \pagestyle{empty}
+}
+\END
+
+\begin{document}
+\end{document}
+
+
+% Local Variables:
+% mode: latex
+% End:

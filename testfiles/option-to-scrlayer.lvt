@@ -1,0 +1,21 @@
+\input regression-test.tex
+\documentclass{article}
+
+\usepackage[markcase=lower]{scrlayer-fancyhdr}
+
+\newcommand*{\TYPEoption}[2]{%
+  \TYPE{#1=#2}%
+}
+\START
+\TEST{option to scrlayer directly: markcase={lower}}{%
+  \KOMAoptionOf[\TYPEoption{markcase}]{scrlayer.sty}{markcase}%
+}
+\END
+
+\begin{document}
+\end{document}
+
+
+% Local Variables:
+% mode: latex
+% End:

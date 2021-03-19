@@ -231,11 +231,11 @@
 % resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4) is an
 % internal basic page style of package \Package{fancyhdr}. It is used for the
 % user page style \Pagestyle{fancy}. The user page style \Pagestyle{fancy} is
-% also used for \Package{fancyhdr}'s undocumented page style
+% also used for \Package{fancyhdr}'s deprecated page style
 % \Pagestyle{fancyplain}, that also redefines page style \Pagestyle{plain} to
 % be \Package{fancyhdr}'s internal page style \Pagestyle{plain@fancy}, that
 % also uses \Pagestyle{fancy} but with \Macro{if@fancyplain} set to
-% \Macro{iftrue}. There is also an undocumented command
+% \Macro{iftrue}. There is also a deprecated command
 % \Macro{fancyplain}\Parameter{plain code}\Parameter{fancy code}, that uses
 % the \meta{plain code} if \Macro{if@fancyplain} is \Macro{iftrue} and
 % \meta{fancy code} if \Macro{if@fancyplain} is \Macro{iffalse}.
@@ -290,11 +290,11 @@
 % \Package{scrlayer-fancyhdr} do redefine page styles \Pagestyle{headings} or
 % \Pagestyle{myheadings}. And neither \Package{scrlayer} nor
 % \Package{fancyhdr} nor \Package{scrlayer-fancyhdr} do redefine page style
-% \Pagestyle{plain} unless you are activating the undocumented
+% \Pagestyle{plain} unless you are activating the deprecated
 % \Package{fancyhdr} page style \Pagestyle{fancyplain}. So if you like to use
 % layers on \Pagestyle{plain} pages, i.\,e. usually the first page of a
 % chapter or part or the page with a title head, you have to either use
-% \Package{fancyhdr}'s undocumented page style \Pagestyle{fancyplain} or
+% \Package{fancyhdr}'s deprecated page style \Pagestyle{fancyplain} or
 % redefine page style \Pagestyle{plain} either using \Macro{fancypagestyle} as
 % documented in the \Package{fancyhdr} manual or using
 % \Macro{DeclareNewPageStyleByLayers}, documented in the \KOMAScript{} manual.

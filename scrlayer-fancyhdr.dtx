@@ -288,7 +288,7 @@
 % \DescribeMacro\ps@plain
 % Note: Currently, neither \Package{scrlayer} nor \Package{fancyhdr} nor
 % \Package{scrlayer-fancyhdr} do redefine page styles \Pagestyle{headings} or
-% \Pagestyle{myheadings}. And neither \Package{scrlayer} nor
+% \Pagestyle{myheadings} by default. And neither \Package{scrlayer} nor
 % \Package{fancyhdr} nor \Package{scrlayer-fancyhdr} do redefine page style
 % \Pagestyle{plain} unless you are activating the deprecated
 % \Package{fancyhdr} page style \Pagestyle{fancyplain}. So if you like to use
@@ -298,6 +298,10 @@
 % redefine page style \Pagestyle{plain} either using \Macro{fancypagestyle} as
 % documented in the \Package{fancyhdr} manual or using
 % \Macro{DeclareNewPageStyleByLayers}, documented in the \KOMAScript{} manual.
+% However from version 4.0 \Package{fancyhdr} provides options
+% \Option{myheadings} and \Option{headings} to redefine the corresponding page
+% style. \Package{scrlayer-fancyhdr} also provides these options and passes
+% them to \Package{fancyhdr}.
 %
 % \DescribeMacro\ps@empty
 % \DescribeMacro\ps@@empty
@@ -325,7 +329,8 @@
 % loading \Package{scrlayer} and \Package{fancyhdr} by loading
 % \Package{scrlayer-fancyhdr} because this avoids option
 % clashes. \Package{scrlayer-fancyhdr} provides all options of
-% \Package{scrlayer} and passes them to \Package{scrlayer}. Nevertheless
+% \Package{scrlayer} and \Package{fancyhdr} and passes them to
+% \Package{scrlayer} resp. \Package{fancyhdr}. Nevertheless
 % sometimes it may be useful to be able to additionally load
 % \Package{scrlayer} or \Package{fancyhdr}.
 %
@@ -354,7 +359,9 @@
 % Note: Loading \Package{scrlayer-fancyhdr} will not make page style
 % \Pagestyle{plain} nor \Pagestyle{headings} nor \Pagestyle{myheadings} or any
 % other page style but \Pagestyle{empty} to automatically be a layer page
-% style!
+% style! But if you are using option \Option{headings} or \Option{myheadings}
+% package \Package{fancyhdr} redefines the corresponding page styles to be
+% \Package{fancyhdr} page styles\,---\,and so become layer page styles.
 %
 % \section{Known Issues}
 %

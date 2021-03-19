@@ -30,6 +30,12 @@ This is an early release of an experimental package.
 
 ## Installation
 
+We recommend to use the package manager of your TeX distribution to install
+packages. However, if you need to install `scrlayer-fancyhdr` manually, you
+can either use a semi-manual installation or a completely manual installation.
+
+### Semi-manual Installation
+
 For a semi-manual installation you can first create a local clone
 of the repository:
 
@@ -56,8 +62,7 @@ or without manual and sources:
 l3build install
 ```
 
-
-------------------------------------------------------------------------------
+### Completely Manual Installation
 
 To do a completely manual installation, download `scrlayer-fancyhdr.dtx`.
 Then extract it using:
@@ -76,7 +81,8 @@ pdflatex scrlayer-fancyhdr.dtx
 pdflatex scrlayer-fancyhdr.dtx
 ```
 
-Now, you can either install it in the proper directory or copy 
-`scrlayer-fancyhdr.sty` to your document directory.
+Now, you can either install it in the proper directory (see the
+documentation of your TeX distribution) or copy `scrlayer-fancyhdr.sty`
+to your document directory.
 
 ------------------------------------------------------------------------------

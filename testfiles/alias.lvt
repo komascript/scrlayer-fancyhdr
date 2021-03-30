@@ -1,0 +1,41 @@
+\input regression-test.tex
+\documentclass{article}
+
+\usepackage{scrlayer-fancyhdr}
+\DeclareNewLayer[%
+  background,page,
+  contents={\TYPE{Layer `background' is used}},
+]{background}
+\DeclareNewLayer[%
+  foreground,page,
+  contents={\TYPE{Layer `foreground' is used}},
+]{foreground}
+\IfPackageAtLeastTF{fancyhdr}{2019/03/21}{%
+  \DeclarePageStyleAlias{@fancy}{f@nch@fancycore}%
+}{%
+  \DeclarePageStyleAlias{f@nch@fancycore}{@fancy}%
+}
+\AddLayersToPageStyle{@fancy}{background,foreground}
+
+\makeatletter
+\newcommand*{\FANCYHF}[1]{%
+  \fancyhf[#1]{\TYPE{fancyhdr element `#1' used}}%
+}
+\@for \FANCYLOCATION:=ELH,ECH,ERH,ELF,ECF,ERF,OLH,OCH,ORH,OLF,OCF,ORF\do {%
+  \expandafter\FANCYHF\expandafter{\FANCYLOCATION}%
+}
+\makeatother
+
+\begin{document}
+Test
+\START
+\pagestyle{fancy}
+\TEST{alias: report used fancyhdr elements and scrlayer layers added to alias}{%
+  \clearpage
+}
+\END
+\end{document}
+
+% Local Variables:
+% mode: latex
+% End:

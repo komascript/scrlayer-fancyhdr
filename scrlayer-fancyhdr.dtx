@@ -46,12 +46,12 @@
 %<body>%%% docstrip run: body
 %<*dtx>
 \ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
-\ProvidesFile{scrlayer-fancyhdr.dtx}[2021-03-17 v0.2
+\ProvidesFile{scrlayer-fancyhdr.dtx}[2021-03-30 v0.2.1
   source of package scrlayer-scrpage]
 %</dtx>
 %<*package>
 %<identify>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
-%<identify>\ProvidesPackage{scrlayer-fancyhdr}[2021-03-17 v0.2
+%<identify>\ProvidesPackage{scrlayer-fancyhdr}[2021-03-30 v0.2.1
 %<identify>  combining fancyhdr with KOMA-Script's scrlayer]
 %</package>
 %<*dtx>
@@ -70,10 +70,14 @@
 \fi
 \endbatchfile
 \documentclass{scrdoc}
+\RedeclareSectionCommand[tocbeforeskip=0pt]{section}
+\RedeclareSectionCommand[tocbeforeskip=.75\baselineskip plus .25\baselineskip]{part}
+\setkomafont{sectionentry}{}
+\KOMAoption{toc}{flat}
 \addtolength{\textwidth}{-1em}
 \addtolength{\marginparwidth}{2em}
 \addtolength{\oddsidemargin}{2em}
-\usepackage[english]{babel}
+\usepackage[main=english,ngerman]{babel}
 \usepackage{csquotes}
 \usepackage{biblatex}
 \usepackage{listings}
@@ -88,8 +92,8 @@
              footers in {\LaTeXe}},
   date    = {2021-01-28},
   edition = {4.0.1},
-  url     = {https://www.ctan.org/pkg/fancydr},
-  urldate = {2021-02-18}
+  url     = {https://www.ctan.org/pkg/fancyhdr},
+  urldate = {2021-03-30}
 }
 
 @Misc{      package:koma-script,
@@ -97,10 +101,10 @@
   author  = {Markus Kohm},
   title   = {{\Package{koma-script}}\,---\,A bundle of versatile classes and
              packages},
-  date    = {2021-03-01},
+  date    = {2021-03-17},
   edition = {3.33},
   url     = {https://www.ctan.org/pkg/koma-script},
-  urldate = {2021-03-01}
+  urldate = {2021-03-30}
 }
 
 @Misc{      package:scrlayer,
@@ -108,23 +112,24 @@
   author  = {Markus Kohm},
   title   = {{\Package{scrlayer}}\,---\,Manage text `layers' within
              {\KOMAScript}},
-  date    = {2021-03-01},
+  date    = {2021-03-17},
   edition = {3.33},
-  url     = {https://www.ctan.org/pkg/koma-script},
-  urldate = {2021-03-01}
+  url     = {https://www.ctan.org/pkg/scrlayer},
+  urldate = {2021-03-30}
 }
 \end{filecontents}
 
 \addbibresource{\jobname.bib}
-\xpretocmd\DescribeMacro{\ifhmode\else\bigskip\noindent\fi}{}{}
-\xpretocmd\DescribeEnv{\ifhmode\else\bigskip\noindent\fi}{}{}
-\xpretocmd\DescribeOption{\ifhmode\else\bigskip\noindent\fi}{}{}
 
 \CodelineIndex
 \RecordChanges
 \GetFileInfo{scrlayer-fancyhdr.dtx}
 \title{The \texttt{scrlayer} interface \texttt{scrlayer-fancyhdr}%
-  \footnote{This is version \fileversion\ of file \texttt{\filename}.}}
+  \footnote{\parbox[t]{.9\linewidth}{\raggedright
+      This is version \fileversion\ of file \texttt{\filename}.\\
+      Dies ist Version \fileversion\ der Datei \texttt{\filename}.}}\\
+  \otherlanguage{ngerman}{Das \texttt{scrlayer}-Interface
+    \texttt{scrlayer-fancyhdr}\footnotemark[1]}}
 \date{\filedate}
 \author{Markus Kohm}
 
@@ -165,7 +170,13 @@
 \providecommand*{\textnote}[2][]{}
 
 \lstnewenvironment{lstcode}{\lstset{language=[LaTeX]TeX}}{}
-\sloppy% YOU SHOULD NOT DO THIS!!!
+
+\renewcaptionname{english}{\partname}{Part}
+\renewcaptionname{english}{\contentsname}{Contents\,/\,Inhalt}%
+\renewcaptionname{english}{\refname}{References\,/\,Literatur}%
+\renewcaptionname{ngerman}{\partname}{Teil}
+\renewcaptionname{ngerman}{\contentsname}{Inhalt\,/\,Contents}
+\renewcaptionname{ngerman}{\refname}{Literatur\,/\,References}%
 
 \begin{document}
 \maketitle
@@ -179,160 +190,181 @@
 % 
 % \changes{v0.0}{2018/09/01}{start of interface}
 % \changes{v0.2}{2021/02/18}{package is no longer part of \KOMAScript}
+% \changes{v0.2.1}{2021/03/30}{improved user manual}
+% \changes{v0.2.1}{2021/03/30}{German user manual}
 %
 % \changes{v0.0}{2018/09/05}{some user documentation}
+% \part{English User Manual}
 % \section{The Purpose of this Package}
+% \label{sec:purpose}
 % This package has been made to give users a chance to combine the features of
-% Piet van Oostrum's \Package{fancyhdr} \autocite{package:fancyhdr} with the
-% features of \Package{scrlayer} \autocite{package:scrlayer}. In other words:
-% It has been made to combine the page layers of \Package{scrlayer} with the
-% page styles of \Package{fancyhdr}.
+% Piet van Oostrum's \mbox{\Package{fancyhdr}} \autocite{package:fancyhdr}
+% with the features of \mbox{\Package{scrlayer}}
+% \autocite{package:scrlayer}. In other words: It has been made to combine the
+% page layers of \mbox{\Package{scrlayer}} with the page styles of
+% \mbox{\Package{fancyhdr}}.
 %
-% In this combination compatibility with \Package{fancyhdr} is the first aim!
-% Usability and the freedom provided by \Package{scrlayer} is only the second
-% one. Compatibility with other packages or classes of \KOMAScript{}
-% \cite{package:koma-script} is not a primary aim. Perhaps it will become an
-% optional feature in future. Abolishing any real or virtual limitations of
-% \Package{fancyhdr} other than make it possible to use layers is not an aim
-% and will not be an aim in future.
+% In this combination compatibility with \mbox{\Package{fancyhdr}} is the
+% first aim!  Usability and the freedom provided by \mbox{\Package{scrlayer}}
+% is only the second one. Compatibility with other packages or classes of
+% \KOMAScript{} \cite{package:koma-script} is not a primary aim. Perhaps it
+% will become an optional feature in future. Abolishing any real or virtual
+% limitations of \mbox{\Package{fancyhdr}} other than make it possible to use
+% layers is not an aim and will not be an aim in future.
 %
 % If you need a better combination of page styles and layers, you should
-% either use the low level interface of \Package{scrlayer} to define your page
-% styles or\,---\,and this is the recommendation of the author\,---\,use
-% \Package{scrlayer-scrpage} instead of \Package{scrlayer-fancyhdr} or
-% \Package{fancyhdr}. If you need more compatibility with other parts of
-% \KOMAScript, i.\,e.\@ with the \KOMAScript{} classes, you should use
-% \Package{scrlayer-scrpage} instead of \Package{scrlayer-fancyhdr} or
-% \Package{fancyhdr}.
+% either use the low level interface of \mbox{\Package{scrlayer}} to define
+% your page styles or\,---\,and this is the recommendation of the
+% author\,---\,use \Package{scrlayer-scrpage} instead of
+% \Package{scrlayer-fancyhdr} or \mbox{\Package{fancyhdr}}. If you need more
+% compatibility with other parts of \KOMAScript, i.\,e.\@ with the
+% \KOMAScript{} classes, you should use \Package{scrlayer-scrpage} instead of
+% \Package{scrlayer-fancyhdr} or \mbox{\Package{fancyhdr}}.
 %
 %
 % \section{How it works}
-% To combine \Package{fancyhdr} and \Package{scrlayer},
+% \label{sec:howitworks}
+%
+% To combine \mbox{\Package{fancyhdr}} and \mbox{\Package{scrlayer}},
 % \Package{scrlayer-scrpage} loads both packages. After loading
-% \Package{fancyhdr} it redefines page style \Pagestyle{@fancy} (up to
-% \Package{fancyhdr} version 3.10) resp. \Pagestyle{f@nch@fancycore} (from
-% \Package{fancyhdr} version 4) to make it a layer page style of
-% \Package{scrlayer} using the newly defined layers \texttt{fancy.head.even},
-% \texttt{fancy.head.odd}, \texttt{fancy.foot.even} and
-% \texttt{fancy.foot.odd}. The \texttt{\dots head\dots} layers are background
-% layers like the page head of \Package{fancyhdr}'s page styles (or other
-% usual page styles). The \texttt{\dots foot\dots} layers are foreground
-% layers like the page footer of \Package{fancyhdr}'s page styles (or other
-% usual page styles). The \texttt{\dots even} layers are restricted to even
-% pages, that means left side pages in two-sided documents. The \texttt{\dots
-% odd} layers are restricted to odd pages, that means right side pages in
-% two-sided documents or all pages in single-sided documents.
+% \mbox{\Package{fancyhdr}} it redefines page style \Pagestyle{@fancy} (up to
+% \mbox{\Package{fancyhdr}} version 3.10) resp. \Pagestyle{f@nch@fancycore}
+% (from \mbox{\Package{fancyhdr}} version 4) to make it a layer page style of
+% \mbox{\Package{scrlayer}} using the newly defined layers
+% \texttt{fancy.head.even}, \texttt{fancy.head.odd}, \texttt{fancy.foot.even}
+% and \texttt{fancy.foot.odd}. The \texttt{\dots head\dots} layers are
+% background layers like the page head of \mbox{\Package{fancyhdr}}'s page
+% styles (or other usual page styles). The \texttt{\dots foot\dots} layers are
+% foreground layers like the page footer of \mbox{\Package{fancyhdr}}'s page
+% styles (or other usual page styles). The \texttt{\dots even} layers are
+% restricted to even pages, that means left side pages in two-sided
+% documents. The \texttt{\dots odd} layers are restricted to odd pages, that
+% means right side pages in two-sided documents or all pages in single-sided
+% documents.
 %
 % \DescribeMacro\ps@@fancy
 % \DescribeMacro\ps@f@nch@fancycore
 % \DescribeMacro\ps@fancyplain
 % \DescribeMacro\ps@plain@fancy
-% Note: Page style \Pagestyle{@fancy} (up to \Package{fancyhdr} version 3.10)
-% resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4) is an
-% internal basic page style of package \Package{fancyhdr}. It is used for the
-% user page style \Pagestyle{fancy}. The user page style \Pagestyle{fancy} is
-% also used for \Package{fancyhdr}'s deprecated page style
-% \Pagestyle{fancyplain}, that also redefines page style \Pagestyle{plain} to
-% be \Package{fancyhdr}'s internal page style \Pagestyle{plain@fancy}, that
-% also uses \Pagestyle{fancy} but with \Macro{if@fancyplain} set to
-% \Macro{iftrue}. There is also a deprecated command
-% \Macro{fancyplain}\Parameter{plain code}\Parameter{fancy code}, that uses
-% the \meta{plain code} if \Macro{if@fancyplain} is \Macro{iftrue} and
-% \meta{fancy code} if \Macro{if@fancyplain} is \Macro{iffalse}.
+% Up to \mbox{\Package{fancyhdr}} verison 3.10 page style \Pagestyle{@fancy}
+% was an internal page style, users should not select direclty. From version 4
+% page style \Pagestyle{f@nch@fancycore} is used internally by package
+% \mbox{\Package{fancyhdr}}. In both cases, the internal page style is used
+% for the user page style \Pagestyle{fancy}. The user page style
+% \Pagestyle{fancy} is also used for \Package{fancyheadings}'s deprecated page
+% style \Pagestyle{fancyplain}, that also redefines page style
+% \Pagestyle{plain} to be \mbox{\Package{fancyhdr}}'s internal page style
+% \Pagestyle{plain@fancy}, that also uses \Pagestyle{fancy} but with
+% \Macro{if@fancyplain} set to \Macro{iftrue}. There is an additional
+% deprecated command \Macro{fancyplain}\Parameter{plain code}\Parameter{fancy
+% code}, too. The command uses the \meta{plain code} if \Macro{if@fancyplain}
+% is \Macro{iftrue} and \meta{fancy code} if \Macro{if@fancyplain} is
+% \Macro{iffalse}. It can be used inside the definition of the page style
+% elements to distinguish settings of \Pagestyle{fancy} and \Pagestyle{plain}
+% pages.
 %
-% Note: Page styles defined using \Package{fancyhdr}'s command
+% Page styles defined using \mbox{\Package{fancyhdr}}'s command
 % \Macro{fancypagestyle} also always use page style \Pagestyle{fancy} and so
-% the internal basic page style \Pagestyle{@fancy} (up to \Package{fancyhdr}
-% version 3.10) resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr}
-% version 4).
+% the internal basic page style \Pagestyle{@fancy} (up to
+% \mbox{\Package{fancyhdr}} version 3.10) resp. \Pagestyle{f@nch@fancycore}
+% (from \mbox{\Package{fancyhdr}} version 4).
 %
-% As a result of the two notes above, every page style of \Package{fancyhdr}
-% always uses the same internal basic page style \Pagestyle{@fancy} (up to
-% \Package{fancyhdr} version 3.10) resp. \Pagestyle{f@nch@fancycore} (from
-% \Package{fancyhdr} version 4). As a result of redefining page style
-% \Pagestyle{@fancy} (up to \Package{fancyhdr} version 3.10)
-% resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4) to be
-% a layer page style, users can add layers to or remove layers from all
-% \Package{fancyhdr} page styles by adding layers to or remove layers from
-% page style \Pagestyle{@fancy} (up to \Package{fancyhdr} version 3.10)
-% resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4). You
-% cannot add layers to or remove layers from \Package{fancyhdr}'s single page
-% styles \Pagestyle{fancy}, \Pagestyle{fancyplain}, \Pagestyle{plain@fancy} or
-% the page styles defined using \Macro{fancypagestyle} directly. So using
-% layers is a all or nothing feature with \Package{scrlayer-scrpage}. However,
-% you can use the second argument of \Macro{fancypagestyle} to add or remove
-% layers whenever one of the \Package{fancyhdr} page styles is activated. So
-% this is a move from the \Package{scrlayer} interface of adding or removing
-% layers to single page styles to the \Package{fancyhdr} interface of defining
+% As a result of the two notes above, every page style of
+% \mbox{\Package{fancyhdr}} always uses the same internal basic page style
+% \Pagestyle{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version
+% 4). As a result of redefining page style \Pagestyle{@fancy} (up to
+% \mbox{\Package{fancyhdr}} version 3.10) resp. \Pagestyle{f@nch@fancycore}
+% (from \mbox{\Package{fancyhdr}} version 4) to be a layer page style, users
+% can add layers to or remove layers from all \mbox{\Package{fancyhdr}} page
+% styles by adding layers to or remove layers from page style
+% \Pagestyle{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version
+% 4). You cannot add layers to or remove layers from
+% \mbox{\Package{fancyhdr}}'s single page styles \Pagestyle{fancy},
+% \Pagestyle{fancyplain}, \Pagestyle{plain@fancy} or the page styles defined
+% using \Macro{fancypagestyle} directly. So using layers is a all or nothing
+% feature with \Package{scrlayer-scrpage}. However, you can use the second
+% argument of \Macro{fancypagestyle} to add or remove layers whenever one of
+% the \mbox{\Package{fancyhdr}} page styles is activated. So this is a move
+% from the \mbox{\Package{scrlayer}} interface of adding or removing layers to
+% single page styles to the \mbox{\Package{fancyhdr}} interface of defining
 % modifications of page style \Pagestyle{fancy}.
 %
-% Another such movement from an \Package{scrlayer} user interface to a
-% \Package{fancyhdr} user interface is the decision whether or not automatic
-% running heads are used. \Package{scrlayer} provides the options
-% \Option{automark} and \Option{manualmark} and commands \Macro{automark} and
-% \Macro{manualmark} to do this decision and also to configure commands like
-% \Macro{partmark}, \Macro{chaptermark}, \Macro{sectionmark} etc. With
-% \Package{scrlayer-fancyhdr} also using page style \Pagestyle{@fancy} (up to
-% \Package{fancyhdr} version 3.10) resp. \Pagestyle{f@nch@fancycore} (from
-% \Package{fancyhdr} version 4) does switch to automatic running heads. The
-% first activation of page style \Pagestyle{fancy} still redefines
-% \Macro{chaptermark} and \Macro{sectionmark}, if a class with \Macro{chapter}
-% is used, or \Macro{sectionmark} and \Macro{subsectionmark}, if a class
-% without \Macro{chapter} is used. However, you still can use
-% \Macro{manualmark} and \Macro{automark} after switching to a
-% \Package{fancyhdr} page style to configure the running heads. So this
-% movement is only partial.
+% Another such movement from a \mbox{\Package{scrlayer}} user interface to a
+% \mbox{\Package{fancyhdr}} user interface is the decision whether or not
+% automatic running heads are used. \mbox{\Package{scrlayer}} provides the
+% options \Option{automark} and \Option{manualmark} and commands
+% \Macro{automark} and \Macro{manualmark} to do this decision and also to
+% configure commands like \Macro{partmark}, \Macro{chaptermark},
+% \Macro{sectionmark} etc. With \Package{scrlayer-fancyhdr} already using page
+% style \Pagestyle{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version 4)
+% does switch to automatic running heads. The first activation of page style
+% \Pagestyle{fancy} still redefines \Macro{chaptermark} and
+% \Macro{sectionmark}, if a class with \Macro{chapter} is used, or
+% \Macro{sectionmark} and \Macro{subsectionmark}, if a class without
+% \Macro{chapter} is used. However, you still can use \Macro{manualmark} and
+% \Macro{automark} after switching to a \mbox{\Package{fancyhdr}} page style
+% to configure the running heads. So this movement is only partial.
 %
 % \DescribeMacro\ps@headings
 % \DescribeMacro\ps@myheadings
 % \DescribeMacro\ps@plain
-% Note: Currently, neither \Package{scrlayer} nor \Package{fancyhdr} nor
-% \Package{scrlayer-fancyhdr} do redefine page styles \Pagestyle{headings} or
-% \Pagestyle{myheadings} by default. And neither \Package{scrlayer} nor
-% \Package{fancyhdr} nor \Package{scrlayer-fancyhdr} do redefine page style
-% \Pagestyle{plain} unless you are activating the deprecated
-% \Package{fancyhdr} page style \Pagestyle{fancyplain}. So if you like to use
-% layers on \Pagestyle{plain} pages, i.\,e. usually the first page of a
-% chapter or part or the page with a title head, you have to either use
-% \Package{fancyhdr}'s deprecated page style \Pagestyle{fancyplain} or
-% redefine page style \Pagestyle{plain} either using \Macro{fancypagestyle} as
-% documented in the \Package{fancyhdr} manual or using
-% \Macro{DeclareNewPageStyleByLayers}, documented in the \KOMAScript{} manual.
-% However from version 4.0 \Package{fancyhdr} provides options
+% Note: Currently, neither \mbox{\Package{scrlayer}} nor
+% \mbox{\Package{fancyhdr}} nor \Package{scrlayer-fancyhdr} do redefine page
+% styles \Pagestyle{headings} or \Pagestyle{myheadings} by default. And
+% neither \mbox{\Package{scrlayer}} nor \mbox{\Package{fancyhdr}} nor
+% \Package{scrlayer-fancyhdr} do redefine page style \Pagestyle{plain} unless
+% you are activating the deprecated \mbox{\Package{fancyhdr}} page style
+% \Pagestyle{fancyplain}. So if you like to use layers on \Pagestyle{plain}
+% pages, i.\,e. usually the first page of a chapter or part or the page with a
+% title head, you have to either use \mbox{\Package{fancyhdr}}'s deprecated
+% page style \Pagestyle{fancyplain} or redefine page style \Pagestyle{plain}
+% either using \Macro{fancypagestyle} as documented in the
+% \mbox{\Package{fancyhdr}} manual or using \Macro{DeclarePageStyleByLayers},
+% documented in the \KOMAScript{} manual.
+% \DescribeOption{myheading}%
+% \DescribeOption{heading}%
+% However from version 4.0 \mbox{\Package{fancyhdr}} provides options
 % \Option{myheadings} and \Option{headings} to redefine the corresponding page
 % style. \Package{scrlayer-fancyhdr} also provides these options and passes
-% them to \Package{fancyhdr}.
+% them to \mbox{\Package{fancyhdr}}.
 %
 % \DescribeMacro\ps@empty
 % \DescribeMacro\ps@@empty
-% Note: Pagestyle \Pagestyle{empty} is somehow special. \Package{scrlayer}
-% redefines it to be a layer page style. And \Package{fancyhdr}'s internal
-% page style \Pagestyle{@empty} is the same like \Pagestyle{empty}. So
-% \Pagestyle{@empty} also uses the layers of \Pagestyle{empty} but you should
-% not try to modify it directly using the interface of
-% \Package{scrlayer}. Moreover, if \Package{fancyhdr} is loaded before
-% \Package{scrlayer-scrpage}, \Package{fancyhdr}'s internal page style
-% \Pagestyle{@empty} is not a copy of \Package{scrlayer}'s layer page style
-% \Pagestyle{empty} but the original standard page style
-% \Pagestyle{empty}. However, with \Package{scrlayer-fancyhdr} package
-% \Package{fancyhdr} does not longer use the internal page style
-% \Pagestyle{@empty}. So you would not need to know this.
+% Note: Pagestyle \Pagestyle{empty} is somehow
+% special. \mbox{\Package{scrlayer}} redefines it to be a layer page
+% style. And \mbox{\Package{fancyhdr}}'s internal page style
+% \Pagestyle{@empty} is the same like \Pagestyle{empty}. So \Pagestyle{@empty}
+% also uses the layers of \Pagestyle{empty} but you should not try to modify
+% it directly using the interface of \mbox{\Package{scrlayer}}. Moreover, if
+% \mbox{\Package{fancyhdr}} is loaded before \Package{scrlayer-fancyhdr},
+% \mbox{\Package{fancyhdr}}'s internal page style \Pagestyle{@empty} is not a
+% copy of \mbox{\Package{scrlayer}}'s layer page style \Pagestyle{empty} but
+% the original standard page style \Pagestyle{empty}. However, with
+% \Package{scrlayer-fancyhdr} package \mbox{\Package{fancyhdr}} does not
+% longer use the internal page style \Pagestyle{@empty}. So you would not need
+% to know this.
 %
 % \section{How to use the Package}
+% \label{sec:howtouse}
 %
 % To use the package you have to load it, e.\,g., using:
 %\begin{verbatim}
 % \usepackage{scrlayer-fancyhdr}
 %\end{verbatim}
-% instead of loading \Package{scrlayer} and \Package{fancyhdr} or before or
-% after loading one of these packages. However it is recommended to replace
-% loading \Package{scrlayer} and \Package{fancyhdr} by loading
-% \Package{scrlayer-fancyhdr} because this avoids option
+% instead of loading \mbox{\Package{scrlayer}} and \mbox{\Package{fancyhdr}}
+% or before or after loading one of these packages. However it is recommended
+% to replace loading \mbox{\Package{scrlayer}} and \mbox{\Package{fancyhdr}}
+% by loading \Package{scrlayer-fancyhdr} because this avoids option
 % clashes. \Package{scrlayer-fancyhdr} provides all options of
-% \Package{scrlayer} and \Package{fancyhdr} and passes them to
-% \Package{scrlayer} resp. \Package{fancyhdr}. Nevertheless
+% \mbox{\Package{scrlayer}} and \mbox{\Package{fancyhdr}} and passes them to
+% \mbox{\Package{scrlayer}} resp. \mbox{\Package{fancyhdr}}. Nevertheless
 % sometimes it may be useful to be able to additionally load
-% \Package{scrlayer} or \Package{fancyhdr}.
+% \mbox{\Package{scrlayer}} or \mbox{\Package{fancyhdr}}. In this case you
+% should first load \mbox{\Package{scrlayer}} next \mbox{\Package{fancyhdr}}
+% and last \Package{scrlayer-fancyhdr}.
 %
 % \DescribeMacro\ps@@fancy
 % \DescribeMacro\ps@f@nch@fancycore
@@ -340,17 +372,18 @@
 % \DescribeMacro\ps@fancyplain
 % \DescribeMacro\ps@plain@fancy
 % \DescribeMacro\fancypagestyle
-% After this you should be able to use the page styles and commands of
-% \Package{fancyhdr} and to add layers to or remove layers from the
-% \Package{fancyhdr}'s internal basic page style \Package{@fancy} (up to
-% \Package{fancyhdr} version 3.10) resp. \Pagestyle{f@nch@fancycore} (from
-% \Package{fancyhdr} version 4). Note, you are not able to add layers to or
-% remove layers from \Package{fancyhdr}'s page styles \Pagestyle{fancy},
+% After loading the package you should be able to use the page styles and
+% commands of \mbox{\Package{fancyhdr}} and to add layers to or remove layers
+% from the \mbox{\Package{fancyhdr}}'s internal basic page style
+% \Package{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version
+% 4). Note, you are not able to add layers to or remove layers from
+% \mbox{\Package{fancyhdr}}'s page styles \Pagestyle{fancy},
 % \Pagestyle{fancyplain}, \Pagestyle{plain@fancy} or page styles defined by
 % \Macro{fancypagestyle}. However adding layers to or removing layers from
-% \Pagestyle{@fancy} (up to \Package{fancyhdr} version 3.10)
-% resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4) will
-% always change all these page styles!
+% \Pagestyle{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version 4)
+% will always change all these page styles!
 %
 % \DescribeMacro\ps@plain
 % \DescribeMacro\ps@headings
@@ -359,16 +392,50 @@
 % Note: Loading \Package{scrlayer-fancyhdr} will not make page style
 % \Pagestyle{plain} nor \Pagestyle{headings} nor \Pagestyle{myheadings} or any
 % other page style but \Pagestyle{empty} to automatically be a layer page
-% style! But if you are using option \Option{headings} or \Option{myheadings}
-% package \Package{fancyhdr} redefines the corresponding page styles to be
-% \Package{fancyhdr} page styles\,---\,and so become layer page styles.
+% style! But if you are using option \Option{headings} or \Option{myheadings},
+% package \mbox{\Package{fancyhdr}} redefines the corresponding page styles to
+% be \mbox{\Package{fancyhdr}} page styles\,---\,and so relate to the same
+% internal layer page style, either \Pagestyle{@fancy} (up to
+% \mbox{\Package{fancyhdr}} version 3.10) or \Pagestyle{@f@nch@fancycore}
+% (from \Package{fancydr} version 4.0).
+%
+%
+% \section{Hint}
+% \label{sec:hint}
+%
+% To become independent from the used version of \mbox{\Package{fancyhdr}} you
+% can use:
+% \begin{verbatim}
+% \IfPackageAtLeastTF{fancyhdr}{2019/03/21}{%
+%   \DeclarePageStyleAlias{@fancy}{f@nch@fancycore}%
+% }{%
+%   \DeclarePageStyleAlias{f@nch@fancycore}{@fancy}%
+% }
+% \end{verbatim}^^A
+% \unskip after loading \Package{scrlayer-fancyhdr} and before adding a layer
+% to the internal layer page style. This code defines page style
+% \Pagestyle{@fancy} to be an alias of \Pagestyle{f@nch@fancycore} if
+% \mbox{\Package{fancyhdr}} from version 4.0 is used or vise versa
+% \Pagestyle{f@nch@fancycore} as an alias of \Pagestyle{@fancy} if
+% \mbox{\Package{fancyhdr}} before version 4.0 is used. So after this code
+% using either
+% \begin{verbatim}
+% \AddLayersToPageStyle{@fancy}{...}
+% \end{verbatim}^^A
+% \unskip or
+% \begin{verbatim}
+% \AddLayersToPageStyle{f@nch@fancycore}{...}
+% \end{verbatim}^^A
+% \unskip would both result in adding the layers to the internal layer page
+% style.
+%
 %
 % \section{Known Issues}
+% \label{sec:issues}
 %
 % Please note, the follow issues are either notes to the package author or
 % notes to the user to avoid them reporting the same issues again and
 % again. Listing these issues does not say they are bugs or features.
-%
 % \begin{itemize}
 % \item
 %   \DescribeMacro\ps@fancy
@@ -379,13 +446,13 @@
 %   You are not able to add layers to the user level page style
 %   \Pagestyle{fancy} or \Pagestyle{fancyplain} or any page style defined by
 %   \Macro{fancypagestyle} but only to the internal page style
-%   \Pagestyle{@fancy} (if you are using \Package{fancyhdr} up to version
-%   3.10) resp. \Pagestyle{f@nch@fancycore} (if you are using
-%   \Package{fancyhdr} from version 4). This is intended as explained in this
-%   manual.
+%   \Pagestyle{@fancy} (if you are using \mbox{\Package{fancyhdr}} up to
+%   version 3.10) resp. \Pagestyle{f@nch@fancycore} (if you are using
+%   \mbox{\Package{fancyhdr}} from version 4). This is intended as explained
+%   in this manual (see also section~\ref{sec:hint}).
 % \item
 %   \DescribeMacro\ps@@empty
-%   Using \Package{fancyhdr}'s internal page style \Pagestyle{@empty}
+%   Using \mbox{\Package{fancyhdr}}'s internal page style \Pagestyle{@empty}
 %   could have strange results. However, there is a simple solution for this:
 %   Don't use the internal \Pagestyle{@empty} but always the user level page
 %   style \Pagestyle{empty}!
@@ -393,10 +460,313 @@
 %   \DescribeMacro\ps@@fancy
 %   \DescribeMacro\ps@f@nch@fancycore
 %   The vertical position of the page header does differ a little bit, if
-%   \Package{scrlayer-fancyhdr} is used instead of \Package{fancyhdr}. This
-%   could be fixed by a modification of the layers \texttt{fancy.head.odd} and
-%   \texttt{fancy.head.even} using \Option{addvoffset}. More tests are needed.
+%   \Package{scrlayer-fancyhdr} is used instead of
+%   \mbox{\Package{fancyhdr}}. This could be fixed by a modification of the
+%   layers \texttt{fancy.head.odd} and \texttt{fancy.head.even} using
+%   \Option{addvoffset}. More tests are needed.
 % \end{itemize}
+% See \url{https://github.com/komascript/scrlayer-fancyhdr/issues} for more
+% issues.
+%
+% \selectlanguage{ngerman}
+% \part{Benutzeranleitung auf Deutsch}
+% \section{Der Sinn dieses Pakets}
+% \label{sec:sinn}
+% Dieses Paket wurde entwickelt, um den Anwendern die Möglichkeit zu geben,
+% die Fähigkeiten von Piet van Oostrums \mbox{\Package{fancyhdr}}
+% \autocite{package:fancyhdr} mit den Fähigkeiten von
+% \mbox{\Package{scrlayer}} \autocite{package:scrlayer} zu kombinieren. In
+% anderen Worten: Es wurde geschaffen, um die Seiten-Ebenen von
+% \mbox{\Package{scrlayer}} mit den Seiten-Stilen von
+% \mbox{\Package{fancyhdr}} zu kombinieren.
+%
+% In dieser Kombination ist Kompatibilität mit \mbox{\Package{fancyhdr}} das
+% oberste Ziel! Verwendbarkeit und die Freiheiten, die von
+% \mbox{\Package{scrlayer}} geboten werden, ist das zweite
+% Ziel. Kompatibilität mit anderen Paketen oder Klassen von \KOMAScript{}
+% \cite{package:koma-script} ist kein primäres Ziel. Vielleicht wird dies in
+% Zukunft eine optionale Fähigkeit werden. Die Aufhebung irgendwelcher realen
+% oder eingebildeter Beschränkungen von \mbox{\Package{fancyhdr}}, die darüber
+% hinaus gehen, die Verwendung von Ebenen zu ermöglichen, ist kein Ziel und
+% wird auch in Zukunft kein Ziel werden.
+%
+% Wenn Sie eine bessere Kombination von Seitenstilen und Ebenen benötigen, so
+% sollten Sie entweder die Low-Level-Schnittstelle von
+% \mbox{\Package{scrlayer}} zur Definition von Seitenstilen oder ---~und das
+% ist die Empfehlung des Autors~--- das Paket \Package{scrlayer-scrpage}
+% anstelle von \Package{scrlayer-fancyhdr} oder \mbox{\Package{fancyhdr}}
+% verwenden. Wenn Sie bessere Kompatibilität mit anderen Teilen von
+% \KOMAScript, beispielsweise mit den \KOMAScript-Klassen. benötigen, sollten
+% Sie \Package{scrlayer-scrpage} anstelle von \Package{scrlayer-fancyhdr} oder
+% \mbox{\Package{fancyhdr}} verwenden.
+%
+% \section{Wie es funktioniert}
+% \label{sec:funktion}
+% Zur Kombination von \mbox{\Package{fancyhdr}} mit \mbox{\Package{scrlayer}}
+% lädt \Package{scrlayer-scrpage} beide Pakete. Nach dem Laden von
+% \mbox{\Package{fancyhdr}} definiert es den Seitenstil \Pagestyle{@fancy}
+% (bis einschließlich \mbox{\Package{fancyhdr}} Version 3.10)
+% bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version 4.0)
+% in einen Ebenen-Seitenstil von \mbox{\Package{scrlayer}} um, bestehend aus
+% den neu definierten Ebenen \texttt{fancy.head.even},
+% \texttt{fancy.head.odd}, \texttt{fancy.foot.even} und
+% \texttt{fancy.foot.odd}. Die \texttt{\dots head\dots}-Ebenen sind
+% Hintergrund-Ebenen entsprechend dem Seitenkopf von
+% \mbox{\Package{fancyhdr}}-Seiten\-stilen (oder anderen gebräuchlichen
+% Seitenstilen). Die \texttt{\dots foot\dots}-Ebenen sind Vordergrund-Ebenen
+% entsprechend dem Seitenfuß von
+% \linebreak\mbox{\Package{fancyhdr}}-Seitenstilen (oder anderen
+% gebräuchlichen Seitenstilen). Die \texttt{\dots even}-Ebenen sind auf gerade
+% Seiten, also linke Seiten von doppelseitigen Dokumenten, beschränkt. Die
+% \texttt{\dots odd}-Ebenen sind auf ungerade Seiten, also rechte Seiten bei
+% doppelseitigen Dokumenten oder alle Seiten bei einseitigen Dokumenten,
+% beschränkt.
+%
+% \DescribeMacro\ps@@fancy
+% \DescribeMacro\ps@f@nch@fancycore
+% \DescribeMacro\ps@fancyplain
+% \DescribeMacro\ps@plain@fancy
+% Bis Version 3.10 von \mbox{\Package{fancyhdr}} war Seitenstil
+% \Pagestyle{@fancy} ein interner Seitenstil, den Anwender selbst nicht direkt
+% verwenden sollten. Ab Version 4.0 wird \Pagestyle{f@nch@fancycore} als
+% interner Seitenstil von Paket \mbox{\Package{fancyhdr}} genutzt. In beiden
+% Fällen wird der interne Seitenstil für den Benutzer\-seiten\-stil
+% \Pagestyle{fancy} verwendet. Der Benutzerseitenstil \Pagestyle{fancy} wird
+% ebenfalls für den veralteten Seitenstil \Pagestyle{fancyplain} des Pakets
+% \Package{fancyheadings} verwendet, der zusätzlich den Seitenstil
+% \Pagestyle{plain} in \mbox{\Package{fancyhdr}}s internen Seitenstil
+% \Pagestyle{plain@fancy} ändert, der ebenfalls \Pagestyle{fancy} verwendet,
+% wobei allerdings \Macro{if@fancyplain} auf \Macro{iftrue} gesetzt ist. Es
+% gibt eine weitere überholte Anweisung
+% \Macro{fancyplain}\Parameter{plain-Code}\Parameter{fancy-Code}. Diese
+% Anweisung verwendet \meta{plain-Code}, wenn \Macro{if@fancyplain}
+% \Macro{iftrue} ist, aber \meta{fancy-Code}, wenn \Macro{if@fancyplain}
+% \Macro{iffalse} ist. Sie kann innerhalb der Definition der
+% Seitenstilelemente verwendet werden um zwischen den Einstellung für
+% \Pagestyle{fancy} und \Pagestyle{plain} zu unterscheiden.
+%
+% Seitenstile, die mit der \mbox{\Package{fancyhdr}}-Anweisung
+% \Macro{fancypagestyle} definiert wurden, verwenden ebenfalls immer den
+% Seitenstil \Pagestyle{fancy} und damit den internen grundlegenden Seitenstil
+% \Pagestyle{@fancy} (bis einschließlich \mbox{\Package{fancyhdr}} Version
+% 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version
+% 4).
+%
+% Als Ergebnis der beiden obigen Anmerkungen, verwenden alle Seitenstile von
+% \mbox{\Package{fancyhdr}} immer denselben internen grundlegenden Seitenstil
+% \Pagestyle{@fancy} (bis einschließlich \mbox{\Package{fancyhdr}} Version
+% 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version
+% 4). Als Ergebnis daraus resultiert aus der Umdefinierung des Seitenstils
+% \Pagestyle{@fancy} (bis einschließlich \mbox{\Package{fancyhdr}} Version
+% 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version
+% 4) in einen Ebenen-Seitenstil, dass Anwender Ebenen zu allen Seitenstilen
+% von \mbox{\Package{fancyhdr}} hinzufügen oder daraus löschen können, indem
+% sie Ebenen zu \Pagestyle{@fancy} (bis einschließlich
+% \mbox{\Package{fancyhdr}} Version 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab
+% \mbox{\Package{fancyhdr}} Version 4) hinzufügen oder daraus löschen. Sie
+% können keine Ebenen unmittelbar zu einzelnen Seitenstilen von
+% \mbox{\Package{fancyhdr}} wie \Pagestyle{fancy}, \Pagestyle{fancyplain},
+% \Pagestyle{plain@fancy} oder anderen mit \Macro{fancypagestyle} definierten
+% Seitenstilen hinzufügen oder daraus löschen. Aber natürlich können Sie das
+% zweite Argument von \Macro{fancypagestyle} nutzen, um Ebenen zum Zeitpunkt
+% der Aktivierung eines \mbox{\Package{fancyhdr}}-Seitenstils hinzuzufügen
+% oder zu entfernen. Dies stellt eine Verschiebung dar weg von der
+% \mbox{\Package{scrlayer}}-Schnittstelle zum Hinzufügen oder Entfernen von
+% Ebenen hin zur \mbox{\Package{fancyhdr}}-Schnittstelle zur Definition von
+% Änderungen des Seitenstils \Pagestyle{fancy}.
+%
+% Ein weitere solche Verschiebung von der Anwenderschnittstelle von
+% \mbox{\Package{scrlayer}} zur Anwenderschnittstelle von
+% \mbox{\Package{fancyhdr}} ist die Entscheidung, ob automatische, lebende
+% Kolumnentitel verwendet werden sollen oder nicht. \mbox{\Package{scrlayer}}
+% bietet dafür die Optionen \Option{automark} und \Option{manualmark} und die
+% Anweisungen \Macro{automark} und \Macro{manualmark}. Diese konfigurieren
+% gleichzeitig Anweisungen wie \Macro{partmark}, \Macro{chaptermark},
+% \Macro{sectionmark} etc. Mit \Package{scrlayer-fancyhdr} wird bereits durch
+% Verwendung von Seitenstil \Pagestyle{@fancy} (bis einschließlich
+% \mbox{\Package{fancyhdr}} Version 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab
+% \mbox{\Package{fancyhdr}} Version 4) auf automatische, lebende Kolumnentitel
+% umgeschaltet. Die erste Aktivierung von \Pagestyle{fancy} definiert auch
+% weiterhin \Macro{chaptermark} und \Macro{sectionmark}, wenn eine Klasse mit
+% \Macro{chapter} verwendet wird, oder \Macro{sectionmark} und
+% \Macro{subsectionmark}, wenn eine Klasse ohne \Macro{chapter} verwendet
+% wird. Dennoch können Sie weiterhin \Macro{manualmark} und \Macro{automark}
+% nach der Umschaltung zu einem \mbox{\Package{fancyhdr}}-Seitenstil
+% verwenden, um die lebenden Kolumnentitel zu konfigurieren. Diese
+% Verschiebung ist also nur partiell.
+%
+% \DescribeMacro\ps@headings
+% \DescribeMacro\ps@myheadings
+% \DescribeMacro\ps@plain
+% Hinweis: Derzeit definieren weder \mbox{\Package{scrlayer}} noch
+% \mbox{\Package{fancyhdr}} noch \Package{scrlayer-fancyhdr} die Seitenstile
+% \Pagestyle{headings} oder \Pagestyle{myheadings} in der Voreinstellung
+% um. Und weder \mbox{\Package{scrlayer}} noch \mbox{\Package{fancyhdr}} oder
+% \Package{scrlayer-fancyhdr} definieren den Seitenstil \Pagestyle{plain} um,
+% solange nicht der veraltete \mbox{\Package{fancyhdr}}-Seitenstil
+% \Pagestyle{fancyplain} aktiviert wird. Wenn Sie also einen Ebeneseitenstil
+% für \Pagestyle{plain}-Seiten wünschen, insbesondere für die erste Seite
+% eines Kapitels oder Teils oder die Seiten mit dem Titelkopf, so müssen Sie
+% entweder den veralteten \mbox{\Package{fancyhdr}}-Seitenstil
+% \Pagestyle{fancyplain} verwenden oder den Seitenstil \Pagestyle{plain}
+% entweder per \Macro{fancypagestyle} umdefinieren, wie dies in der
+% \mbox{\Package{fancyhdr}}-Anleitung beschrieben ist, oder per
+% \Macro{DeclarePageStyleByLayers}, wie dies in der \KOMAScript-Anleitung
+% dokumentiert ist.
+% \DescribeOption{myheading}%
+% \DescribeOption{headings}%
+% Darüber hinaus bietet \mbox{\Package{fancyhdr}} ab Version 4.0 die Optionen
+% \Option{myheadings} und \Option{headings}, um die entsprechenden Seitenstile
+% umzudefinieren. \Package{scrlayer-fancyhdr} bietet diese Optionen ebenfalls
+% und leitet sie an \mbox{\Package{fancyhdr}} weiter.
+%
+% \DescribeMacro\ps@empty
+% \DescribeMacro\ps@@empty
+% Hinweis: Der Seitenstil \Pagestyle{empty} ist etwas
+% speziell. \mbox{\Package{scrlayer}} definiert dieses in einen
+% Ebenen-Seitenstil um. Und \mbox{\Package{fancyhdr}}s interner Seitenstil
+% \Pagestyle{@empty} ist ebenfalls identisch mit \Pagestyle{empty}. Daher
+% verwendet auch \Pagestyle{@empty} die Ebenen von \Pagestyle{empty}, aber Sie
+% sollten nicht versuchen, diese direkt mit der Schnittstelle von
+% \mbox{\Package{scrlayer}} zu verändern. Mehr noch, wenn
+% \mbox{\Package{fancyhdr}} vor \Package{scrlayer-fancyhdr} geladen wird, ist
+% der interne Seitenstil \Pagestyle{@empty} von \mbox{\Package{fancyhdr}}
+% nicht länger eine Kopie des Ebenen-Seitenstils \Pagestyle{empty} von
+% \mbox{\Package{scrlayer}}, sondern weiterhin des Standard-Seitenstils
+% \Pagestyle{empty}. Allerdings verwendet \mbox{\Package{fancyhdr}} mit
+% \Package{scrlayer-fancyhdr} selbst den internen Seitenstil
+% \Pagestyle{@empty} gar nicht mehr. Daher brauchen Sie das eigentlich auch
+% nicht zu wissen.
+%
+% \section{Wie man das Paket verwendet}
+% \label{sec:verwendung}
+%
+% Um das Paket zu verwenden, muss man es laden, beispielsweise per:
+%\begin{verbatim}
+% \usepackage{scrlayer-fancyhdr}
+%\end{verbatim}
+% an Stelle von \mbox{\Package{scrlayer}} oder \mbox{\Package{fancyhdr}} oder
+% vor dem Laden eines dieser Pakete. Empfohlen wird das komplette Ersetzen von
+% \mbox{\Package{scrlayer}} und \mbox{\Package{fancyhdr}} durch das Laden von
+% \Package{scrlayer-fancyhdr}, weil dadurch Optionskonflikte
+% (engl. \emph{option clash}) vermieden wird. \Package{scrlayer-fancyhdr}
+% stellt alle Optionen von \mbox{\Package{scrlayer}} und
+% \mbox{\Package{fancyhdr}} bereit und leitet diese an
+% \mbox{\Package{scrlayer}} bzw. \mbox{\Package{fancyhdr}}
+% weiter. Nichtsdestotrotz kann es in seltenen Fällen nützlich sein, dass man
+% das Paket auch zusätzlich nach \mbox{\Package{scrlayer}} und
+% \mbox{\Package{fancyhdr}} laden kann. In diesem Fall sollte
+% \mbox{\Package{scrlayer}} vor \mbox{\Package{fancyhdr}} und zuletzt
+% \Package{scrlayer-fancyhdr} geladen werden.
+%
+% \DescribeMacro\ps@@fancy
+% \DescribeMacro\ps@f@nch@fancycore
+% \DescribeMacro\ps@fancy
+% \DescribeMacro\ps@fancyplain
+% \DescribeMacro\ps@plain@fancy
+% \DescribeMacro\fancypagestyle
+% Nach dem Laden des Pakets sollten Sie in der Lage sein, die Seitenstile und
+% Befehle von \mbox{\Package{fancyhdr}} zu verwenden und Ebenen zum internen
+% \mbox{\Package{fancyhdr}}-Seitenstil \Package{@fancy} (bis einschließlich
+% \mbox{\Package{fancyhdr}} Version 3.10) bzw. \Pagestyle{f@nch@fancycore} (ab
+% \mbox{\Package{fancyhdr}} Version 4) hinzuzufügen oder davon zu
+% entfernen. Hinweis: Es ist Ihnen nicht möglich, Ebenen zu den
+% \mbox{\Package{fancyhdr}}-Seitenstilen \Pagestyle{fancy},
+% \Pagestyle{fancyplain}, \Pagestyle{plain@fancy} oder jedem anderen mit
+% \Macro{fancypagestyle} definierten Seitenstil hinzuzufügen. Jedoch wird das
+% Hinzufügen oder Entfernen von Ebenen zu bzw. von \Package{@fancy} (bis
+% einschließlich \mbox{\Package{fancyhdr}} Version 3.10)
+% bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version 4)
+% immer alle diese Seitenstile mit ändern!
+%
+% \DescribeMacro\ps@plain
+% \DescribeMacro\ps@headings
+% \DescribeMacro\ps@myheadings
+% \DescribeMacro\ps@empty
+% Hinweis: Das Laden von Paket \Package{scrlayer-fancyhdr} wird weder den
+% Seitenstil \Pagestyle{plain} noch \Pagestyle{headings} noch
+% \Pagestyle{myheadings} noch irgend einen anderen Seitenstil außer
+% \Pagestyle{empty} automatisch in einen Ebenen-Seitenstil umwandeln! Wenn Sie
+% aber Option \Option{headings} oder \Option{myheadings} angeben, definiert
+% \mbox{\Package{fancyhdr}} die entsprechenden Seitenstile in
+% \mbox{\Package{fancyhdr}}-Seitenstil um --~somit hängen diese dann von
+% demselben internen Seitenstil, entweder \Package{@fancy} (bis einschließlich
+% \mbox{\Package{fancyhdr}} Version 3.10) oder \Pagestyle{f@nch@fancycore} (ab
+% \mbox{\Package{fancyhdr}} Version 4), ab.
+%
+%
+%
+% \section{Tipp}
+% \label{sec:tipp}
+%
+% Um unabhängig von der verendeten Version von \mbox{\Package{fancyhdr}} zu
+% werden, kann man:
+% \begin{verbatim}
+% \IfPackageAtLeastTF{fancyhdr}{2019/03/21}{%
+%   \DeclarePageStyleAlias{@fancy}{f@nch@fancycore}%
+% }{%
+%   \DeclarePageStyleAlias{f@nch@fancycore}{@fancy}%
+% }
+% \end{verbatim}^^A
+% \unskip nach dem Laden von \Package{scrlayer-fancyhdr} verwendenm, bevor man
+% irgendwelche Ebenen zu dem internen Seitenstil hinzufügt oder davon
+% entfernt. Diese Codezeilen definieren bei Verwendung von
+% \mbox{\Package{fancyhdr}} aber Version 4.0 Seitenstil \Pagestyle{@fancy} als
+% Alias für Seitenstil \Pagestyle{f@nch@fancycore} und umgekehrt für
+% \mbox{\Package{fancyhdr}} bis einschließlich Version 3.10
+% \Pagestyle{f@ch@fancycore} als Alias für Seitenstil \Package{@fancy}. Damit
+% führt dann sowohl:
+% \begin{verbatim}
+% \AddLayersToPageStyle{@fancy}{...}
+% \end{verbatim}^^A
+% \unskip als auch
+% \begin{verbatim}
+% \AddLayersToPageStyle{f@nch@fancycore}{...}
+% \end{verbatim}^^A
+% \unskip dazu, dass die Ebenen zum internen Ebenen-Seitenstil hinzugefügt
+% werden.
+%
+%
+%
+% \section{Bekannte Probleme}
+% \label{sec:probleme}
+%
+% Bitte beachten Sie, dass die folgenden Hinweise entweder Notizen für den
+% Paketautor oder Hinweise für die Anwender darstellen und verhindern sollen,
+% dass dieselben Probleme immer wieder gemeldet werden. Die Auflistung sagt
+% nichts darüber aus, ob es sich dabei um Fehler oder Eigenschaften handelt:
+% \begin{itemize}
+% \item
+%   \DescribeMacro\ps@fancy
+%   \DescribeMacro\ps@f@nch@fancycore
+%   \DescribeMacro\ps@fancyplain
+%   \DescribeMacro\fancypagestyle
+%   \DescribeMacro\ps@@fancy
+%   Sie können keine Ebenen zu den Seitenstilen auf Benutzerebene
+%   \Pagestyle{fancy} oder \Pagestyle{fancyplain} oder irgendwelchen anderen
+%   Seitenstilen, die mit \Macro{fancypagestyle} definiert wurden,
+%   hinzufügen. Dies ist nur für den internen Seitenstil \Package{@fancy} (bis
+%   einschließlich \mbox{\Package{fancyhdr}} Version 3.10)
+%   bzw. \Pagestyle{f@nch@fancycore} (ab \mbox{\Package{fancyhdr}} Version 4)
+%   möglich (see auch Abschnitt~\ref{sec:tipp}).
+% \item 
+%   \DescribeMacro\ps@@empty
+%   Die Verwendung des internen \mbox{\Package{fancyhdr}}-Seitenstils
+%   \Pagestyle{@empty} kann zu unerwarteten Ergebnissen führen. Es gibt jedoch
+%   eine einfache Lösung für dieses Problem: Verwenden Sie nicht den internen
+%   Seitenstile \Package{@empty}, sondern immer den Seitenstile
+%   \Package{empty} der Benutzerebene.
+% \item
+%   \DescribeMacro\ps@@fancy
+%   \DescribeMacro\ps@f@nch@fancycore
+%   Die vertikale Position des Seitenkopfes weicht ein wenig ab, wenn
+%   \Package{scrlayer-fancyhdr} an Stelle von \mbox{\Package{fancyhdr}}
+%   verwendet wird. Dies kann durch leichte Modifikation der Ebenen
+%   \texttt{fancy.head.odd} und \texttt{fancy.head.even} mit Hilfe von
+%   \Option{addvoffset} behoben werden. Weitere Tests sind hier erforderlich.
+% \end{itemize}
+% Siehe \url{https://github.com/komascript/scrlayer-fancyhdr/issues} für
+% weitere bekannte Probleme.
 %
 %\iffalse
 %</dtx>
@@ -404,23 +774,26 @@
 %
 % \StopEventually{}
 %
-% \section{Implementation of \Package{scrlayer-fancyhdr}}
+% \selectlanguage{english}
+% \part{Implementation of \Package{scrlayer-fancyhdr}}
 % \label{sec:scrlayer-fancyhdr}
 %
+% \sloppy^^A Good paragraph breaking is not the purpose of implementation
+%        ^^A documentation.
 % \iffalse
 %<*package>
 % \fi
 %
 % This section if for developers only.
 %
-% We need \Package{scrlayer} at least version 2021/02/15,
+% We need \mbox{\Package{scrlayer}} at least version 2021/02/15,
 %    \begin{macrocode}
 %<*init>
 \RequirePackage{scrlayer}[2021/02/15]
 %</init>
 %    \end{macrocode}
 % Because before \cs{scrlayer@do@inherited@options} would not be defined. And
-% we need it, to inherit all options of \Package{scrlayer}.
+% we need it, to inherit all options of \mbox{\Package{scrlayer}}.
 %    \begin{macrocode}
 %<*options>
 \scrlayer@do@inherited@options{\scrlayer@inherit@option}
@@ -436,23 +809,23 @@
 %    \end{macrocode}
 %
 % Note: The main problem of this interface is, that it tries to implement the
-% user interface of package \Package{fancyhdr} by Piet van Oostrum, that is
-% completely different from \Package{scrlayer} and not really compatible with
-% \Package{scrlayer}, using \Package{scrlayer}. This means, that
+% user interface of package \mbox{\Package{fancyhdr}} by Piet van Oostrum, that is
+% completely different from \mbox{\Package{scrlayer}} and not really compatible with
+% \mbox{\Package{scrlayer}}, using \mbox{\Package{scrlayer}}. This means, that
 % \Package{scrlayer-fancyhdr} never can be a drop-in replacement of
-% \Package{fancyhdr}. Nevertheless it can help to let \Package{scrlayer} and
-% \Package{fancyhdr} coexist. To do so
+% \mbox{\Package{fancyhdr}}. Nevertheless it can help to let \mbox{\Package{scrlayer}} and
+% \mbox{\Package{fancyhdr}} coexist. To do so
 % \begin{itemize}
-% \item the lowest level of \Package{fancyhdr} should not be the page style
+% \item the lowest level of \mbox{\Package{fancyhdr}} should not be the page style
 % but a layer
-% \item the page styles of \Package{fancyhdr} should be layer page styles
-% \item init code of the page styles of \Package{fancyhdr} should use the
+% \item the page styles of \mbox{\Package{fancyhdr}} should be layer page styles
+% \item init code of the page styles of \mbox{\Package{fancyhdr}} should use the
 % layer page init code
 % \end{itemize}
 % Currently it is unsure whether it would be best to do a new implementation
-% or to load original \Package{fancyhdr} and to only modify some things. First
+% or to load original \mbox{\Package{fancyhdr}} and to only modify some things. First
 % I'll try the second method. Currently we explicitly provide the options of
-% \Package{fancyhdr}.
+% \mbox{\Package{fancyhdr}}.
 %    \begin{macrocode}
 %<*options>
 \DeclareOption{nocheck}{\PassOptionsToPackage{nocheck}{fancyhdr}}
@@ -498,31 +871,31 @@
 ]{fancy.foot.even}
 %    \end{macrocode}
 % \begin{macro}{\ps@f@nch@fancycore}
-% \changes{0.1.3558}{2021/02/15}{support for \Package{fancyhdr} 4}
+% \changes{0.1.3558}{2021/02/15}{support for \mbox{\Package{fancyhdr}} 4}
 % \begin{macro}{\ps@@fancy}
 % \begin{macro}{\@mkboth}
 % And have to create a layer page style from this new layers, but we do not
 % redefine page style \Pagestyle{fancy} but the low level page style
-% \Pagestyle{@fancy} (up to \Package{fancyhdr} version 3.10)
-% resp. \Pagestyle{f@nch@fancycore} (from \Package{fancyhdr} version 4.0).
+% \Pagestyle{@fancy} (up to \mbox{\Package{fancyhdr}} version 3.10)
+% resp. \Pagestyle{f@nch@fancycore} (from \mbox{\Package{fancyhdr}} version 4.0).
 %
-% \Package{fancyhdr} does some initialization at the very first call
-% of \cs{pagestyle{fancy}}. To do so \Package{fancyhdr} first uses a different
+% \mbox{\Package{fancyhdr}} does some initialization at the very first call
+% of \cs{pagestyle{fancy}}. To do so \mbox{\Package{fancyhdr}} first uses a different
 % page style definition, that does the initialization and redefines the page
 % style afterwards. This is still active with \Package{scrlayer-fancyhdr}.
-% Additionally, \Package{fancyhdr} redefines \cs{@mkboth} at every selection
+% Additionally, \mbox{\Package{fancyhdr}} redefines \cs{@mkboth} at every selection
 % of the internal page style \Pagestyle{@fancy}
 % resp. \Pagestyle{f@nch@fancycore}. This can be adapted using the
 % \Option{onselect} feature of the new layer page style \Pagestyle{@fancy}
 % resp. \Pagestyle{f@nch@fancycore}. In my opinion, the
 % |\let\@mkboth\markboth| used by page style \Pagestyle{headings} of, e.\,g.,
 % the standard classes or the \KOMAScript{} classes would be best
-% here. However, \Package{fancyhdr} uses the uncommon
+% here. However, \mbox{\Package{fancyhdr}} uses the uncommon
 % |\def\@mkboth{\protect\markboth}|, which would fail if a class or package
 % tests \cs{@mkboth} using |\ifx\@mkboth\markboth|. However, \KOMAScript's
 % \cs{IfActiveMkBoth} (see the \Package{scrbase} chapter in the \KOMAScript{}
-% manual) does also recognize the \Package{fancyhdr} definition and copying
-% this is more compatible with \Package{fancyhdr}.
+% manual) does also recognize the \mbox{\Package{fancyhdr}} definition and copying
+% this is more compatible with \mbox{\Package{fancyhdr}}.
 %    \begin{macrocode}
 \@ifpackagelater{fancyhdr}{2019/03/21}{%
   \DeclarePageStyleByLayers[
@@ -546,9 +919,9 @@
 % supported by \Package{scrlayer-fancyhdr}. Also currently the font features
 % of the \KOMAScript{} classes are not supported by
 % \Package{scrlayer-fancyhdr}. However you are now able to combine other
-% features of \Package{scrlayer} with features of \Package{fancyhdr} and you
-% can, e.g., use \Package{scrlayer-notecolumn} with
-% \Package{scrlayer-fancyhdr}.
+% features of \mbox{\Package{scrlayer}} with features of
+% \mbox{\Package{fancyhdr}} and you can, e.g., use
+% \Package{scrlayer-notecolumn} with \Package{scrlayer-fancyhdr}.
 % \end{macro}%^^A \@mkboth
 % \end{macro}%^^A \ps@@fancy
 % \end{macro}%^^A \ps@f@nch@fancycore

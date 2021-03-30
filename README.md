@@ -4,7 +4,7 @@
 
 LaTeX package `scrlayer-fancyhdr`  
 Copyright (c) 2008—2021 Markus Kohm  
-Release: 2021-03-17 v0.2  
+Release: 2021-03-30 v0.2.1  
 License: LPPL 1.3c (see LICENSE.md)  
 CTAN Location: https://ctan.org/pkg/scrlayer-fancyhdr
 

@@ -15,6 +15,7 @@
 ## specific l3build files and folders
 build
 *-ctan.zip
+*-ctan.curlopt
 scrlayer-fancyhdr.pdf
 
 ## Intermediate documents:

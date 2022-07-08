@@ -46,7 +46,7 @@ uploadconfig = {
 
 -- Typesetting
 
-typesetruns  = 4
+typesetruns  = 5
 
 -- Detail how to set the version automatically
 -- Example: `l3build tag --date 2020-02-31 v0.3'

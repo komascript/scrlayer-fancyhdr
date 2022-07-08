@@ -2,7 +2,7 @@
 
 --[[
   Build script for scrlayer-fancyhdr project
-  Copyright (C) 2021 Markus Kohm
+  Copyright (c) 2021–2022 Markus Kohm
 
   This file is part of the build system of scrlayer-fancyhdr.
 
@@ -14,8 +14,7 @@
     https://www.latex-project.org/lppl.txt
 ]]
 
-release_info = "2021-03-30 v0.2.1"
-
+release_info = "2022-07-08 v0.2.2"
 -- Bundle and modules
 
 module       = "scrlayer-fancyhdr"
@@ -26,7 +25,7 @@ installfiles = { "scrlayer-fancyhdr.sty" }
 
 -- Package
 
-packtdszip = false
+packtdszip   = false
 
 -- CTAN information
 
@@ -45,6 +44,10 @@ uploadconfig = {
   repository  = "https://github.com/komascript/scrlayer-fancyhdr.git",
 }
 
+-- Typesetting
+
+typesetruns  = 4
+
 -- Detail how to set the version automatically
 -- Example: `l3build tag --date 2020-02-31 v0.3'
 
@@ -55,15 +58,15 @@ function update_tag (file,content,tagname,tagdate)
    
    if string.match (file, "%.dtx$") then
       return string.gsub (content,
-                          "%[%d%d%d%d%-%d%d%-%d%d v%d+%.%d+",
+                          "%[%d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+",
                           "[" .. tagdate .. " v" .. tagname )
    elseif string.match (file, "%.md$") then
       return string.gsub (content,
-                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v%d+%.%d+  \n",
+                          "\nRelease: %d%d%d%d%-%d%d%-%d%d v[%d%.]*%d+  \n",
                           "\nRelease: " .. tagdate .. " v" .. tagname .. "  \n")
    elseif string.match (file, "%.lua$") then
       return string.gsub (content,
-                          '\nrelease_info = "%d%d%d%d%-%d%d%-%d%d v%d+%.%d+"\n',
+                          '\nrelease_info%s*=%s*"%d%d%d%d%-%d%d%-%d%d%s*v[%d%.]*%d+"%s*\n',
                           '\nrelease_info = "' .. tagdate .. " v" .. tagname .. '"\n')
    end
    return content

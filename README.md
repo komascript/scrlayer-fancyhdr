@@ -3,8 +3,8 @@
 ------------------------------------------------------------------------------
 
 LaTeX package `scrlayer-fancyhdr`  
-Copyright (c) 2008—2021 Markus Kohm  
-Release: 2021-03-30 v0.2.1  
+Copyright (c) 2008—2022 Markus Kohm  
+Release: 2022-07-08 v0.2.2  
 License: LPPL 1.3c (see LICENSE.md)  
 CTAN Location: https://ctan.org/pkg/scrlayer-fancyhdr
 

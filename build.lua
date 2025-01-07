@@ -14,7 +14,7 @@
     https://www.latex-project.org/lppl.txt
 ]]
 
-release_info = "2025-01-07 v0.3"
+release_info = "2025-01-07 v0.3.1"
 -- Bundle and modules
 
 module       = "scrlayer-fancyhdr"

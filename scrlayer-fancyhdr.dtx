@@ -1,7 +1,7 @@
 % \iffalse^^A meta-comment
 % ======================================================================
 % scrlayer-fancyhdr.dtx
-% Copyright (c) Markus Kohm, 2021–2022
+% Copyright (c) Markus Kohm, 2021–2025
 %
 % This file is part of the LaTeX2e package `scrlayer-fancyhdr'.
 %
@@ -18,41 +18,27 @@
 %
 % This work consists of the files `scrlayer-fancyhdr.dtx' and
 % `README.md'.
-% ----------------------------------------------------------------------
-% scrlayer-fancyhdr.dtx
-% Copyright (c) Markus Kohm, 2021
-%
-% Diese Datei ist Teil des LaTeX2e Pakets `scrlayer-fancyhdr'.
-%
-% Dieses Werk darf nach den Bedingungen der LaTeX Project Public Lizenz,
-% Version 1.3c.
-% Die neuste Version dieser Lizenz ist
-%   http://www.latex-project.org/lppl.txt
-% und Version 1.3c ist Teil aller Verteilungen von LaTeX
-% Version 2005/12/01 und dieses Werks.
-%
-% Dieses Werk hat den LPPL-Verwaltungs-Status "author-maintained"
-% (allein durch den Autor verwaltet).
-%
-% Der Aktuelle Verwalter und Autor dieses Werkes ist Markus Kohm.
-%
-% Dieses Werk besteht aus den Dateien `scrlayer-fancyhdr.dtx' und
-% `README.md'.
 % ======================================================================
 %
 %<identify>%%% docstrip run: identify
 %<init>%%% docstrip run: init
 %<options>%%% docstrip run: options
 %<body>%%% docstrip run: body
+%\changes{v0.3}{2025-01-07}{needs at least \LaTeX{} 2020-10-01}
+%<identify>\NeedsTeXFormat{LaTeX2e}[2020/10/01]
 %<*dtx>
 \ifx\ProvidesFile\undefined\def\ProvidesFile#1[#2]{}\fi
-\ProvidesFile{scrlayer-fancyhdr.dtx}[2022-07-08 v0.2.2
-  source of package scrlayer-scrpage]
+\ProvidesFile{scrlayer-fancyhdr.dtx}
+%</dtx>
+%<package&identify>\ProvidesPackage{scrlayer-fancyhdr}
+%<*dtx|(package&identify)>
+  [2025-01-07 v0.3
+%</dtx|(package&identify)>
+%<*dtx>              
+    source of package scrlayer-scrpage]
 %</dtx>
 %<*package>
-%<identify>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
-%<identify>\ProvidesPackage{scrlayer-fancyhdr}[2022-07-08 v0.2.2
-%<identify>  combining fancyhdr with KOMA-Script's scrlayer]
+%<identify>    combining fancyhdr with KOMA-Script's scrlayer]
 %</package>
 %<*dtx>
 \ifx\documentclass\undefined
@@ -82,10 +68,10 @@
   author  = {Piet van Oostrum},
   title   = {{\pkg{fancyhdr}}\,---\,Extensive control of page headers and
              footers in {\LaTeXe}},
-  date    = {2022-05-18},
-  edition = {4.0.3},
+  date    = {2025-01-06},
+  edition = {5.1},
   url     = {https://www.ctan.org/pkg/fancyhdr},
-  urldate = {2022-07-08}
+  urldate = {2025-01-07}
 }
 
 @Misc{      package:koma-script,
@@ -93,10 +79,10 @@
   author  = {Markus Kohm},
   title   = {{\pkg{koma-script}}\,---\,A bundle of versatile classes and
              packages},
-  date    = {2022-07-04},
-  edition = {3.37},
+  date    = {2024-10-24},
+  edition = {3.43},
   url     = {https://www.ctan.org/pkg/koma-script},
-  urldate = {2022-07-08}
+  urldate = {2025-01-07}
 }
 
 @Misc{      package:scrlayer,
@@ -104,10 +90,10 @@
   author  = {Markus Kohm},
   title   = {{\pkg{scrlayer}}\,---\,Manage text `layers' within
              {\KOMAScript}},
-  date    = {2022-07-04},
-  edition = {3.37},
+  date    = {2024-10-24},
+  edition = {3.43},
   url     = {https://www.ctan.org/pkg/scrlayer},
-  urldate = {2022-07-08}
+  urldate = {2025-01-07}
 }
 \end{filecontents}
 
@@ -427,6 +413,8 @@
 %   \pkg{fancyhdr}. This could be fixed by a modification of the
 %   layers \texttt{fancy.head.odd} and \texttt{fancy.head.even} using
 %   \opt{addvoffset}. More tests are needed.
+% \item
+%   Not all ew features of \pkg{fancyhdr} v5 have been tested yet.
 % \end{itemize}
 % See \url{https://github.com/komascript/scrlayer-fancyhdr/issues} for more
 % issues.
@@ -586,7 +574,7 @@
 % \DescribePageStyle{empty}
 % \DescribeiPageStyle{@empty}
 % Hinweis: Der Seitenstil \pstyle{empty} ist etwas
-% speziell. \pkg{scrlayer} definiert dieses in einen
+% speziell. \pkg{scrlayer} definiert diesen in einen
 % Ebenen-Seitenstil um. Und \pkg{fancyhdr}s interner Seitenstil
 % \pstyle{@empty} ist ebenfalls identisch mit \pstyle{empty}. Daher
 % verwendet auch \pstyle{@empty} die Ebenen von \pstyle{empty}, aber Sie
@@ -727,6 +715,8 @@
 %   verwendet wird. Dies kann durch leichte Modifikation der Ebenen
 %   \texttt{fancy.head.odd} und \texttt{fancy.head.even} mit Hilfe von
 %   \opt{addvoffset} behoben werden. Weitere Tests sind hier erforderlich.
+% \item
+%   Noch nicht alle neuen Möglichkeiten von \pkg{fancyhdr} v5 sind getested.
 % \end{itemize}
 % Siehe \url{https://github.com/komascript/scrlayer-fancyhdr/issues} für
 % weitere bekannte Probleme.
@@ -789,12 +779,14 @@
 % or to load original \pkg{fancyhdr} and to only modify some things. First
 % I'll try the second method. Currently we explicitly provide the options of
 % \pkg{fancyhdr}.
+% \changes{v0.3}{2025-01-07}{new \pkg{fancyhdr} option \opt{twoside}}
 %    \begin{macrocode}
 %<*options>
 \DeclareOption{nocheck}{\PassOptionsToPackage{nocheck}{fancyhdr}}
 \DeclareOption{compatV3}{\PassOptionsToPackage{compatV3}{fancyhdr}}
 \DeclareOption{myheadings}{\PassOptionsToPackage{myheadings}{fancyhdr}}
 \DeclareOption{headings}{\PassOptionsToPackage{headings}{fancyhdr}}
+\DeclareOption{twoside}{\PassOptionsToPackage{twoside}{fancyhdr}}
 %</options>
 %    \end{macrocode}
 %    \begin{macrocode}
@@ -806,32 +798,73 @@
 % We need at least one new layer for the new layer page style
 % \pstyle{fancy}. However, it could be useful to have not only one but
 % four layers (even side head, odd side head, even side foot, odd side foot).
+% \changes{v0.3}{2025-01-07}{\cs{f@nch@head} and \cs{f@nch@foot} have 8
+%   arguments with \pkg{fancyhdr} v5}
 %    \begin{macrocode}
 %<*body>
-\DeclareNewLayer[%
-  background,oddpage,
-  head,
-  contents={\hb@xt@ \layerwidth{%
-      \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh}}
-]{fancy.head.odd}
-\DeclareNewLayer[%
-  background,evenpage,
-  head,
-  contents={\hb@xt@ \layerwidth{%
-      \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh}}
-]{fancy.head.even}
-\DeclareNewLayer[%
-  foreground,oddpage,
-  foot,
-  contents={\hb@xt@ \layerwidth{%
-      \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf}}
-]{fancy.foot.odd}
-\DeclareNewLayer[%
-  foreground,evenpage,
-  foot,
-  contents={\hb@xt@ \layerwidth{%
-      \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf}}
-]{fancy.foot.even}
+\IfPackageAtLeastTF{fancyhdr}{2025/01/01}{%
+  \DeclareNewLayer[%
+    background,oddpage,
+    head,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
+                   \f@nch@width@olh\f@nch@width@och\f@nch@width@orh
+    }}
+  ]{fancy.head.odd}
+  \DeclareNewLayer[%
+    background,evenpage,
+    head,
+    contents={\hb@xt@ \layerwidth{%
+        f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
+                  \f@nch@width@elh\f@nch@width@ech\f@nch@width@erh
+    }}
+  ]{fancy.head.even}
+  \DeclareNewLayer[%
+    foreground,oddpage,
+    foot,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
+                   \f@nch@width@olf\f@nch@width@ocf\f@nch@width@orf
+    }}
+  ]{fancy.foot.odd}
+  \DeclareNewLayer[%
+    foreground,evenpage,
+    foot,
+    contents={\hb@xt@ \layerwidth{%
+        f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
+        \f@nch@width@elf\f@nch@width@ecf\f@nch@width@erf
+    }}
+  ]{fancy.foot.even}
+}{%
+  \DeclareNewLayer[%
+    background,oddpage,
+    head,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
+    }}
+  ]{fancy.head.odd}
+  \DeclareNewLayer[%
+    background,evenpage,
+    head,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
+    }}
+  ]{fancy.head.even}
+  \DeclareNewLayer[%
+    foreground,oddpage,
+    foot,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
+    }}
+  ]{fancy.foot.odd}
+  \DeclareNewLayer[%
+    foreground,evenpage,
+    foot,
+    contents={\hb@xt@ \layerwidth{%
+        \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
+    }}
+  ]{fancy.foot.even}
+}
 %    \end{macrocode}
 % \begin{ipgstyle}{f@nch@fancycore}
 % \changes{0.1.3558}{2021/02/15}{support for \pkg{fancyhdr} 4}
@@ -860,7 +893,7 @@
 % manual) does also recognize the \pkg{fancyhdr} definition and copying
 % this is more compatible with \pkg{fancyhdr}.
 %    \begin{macrocode}
-\@ifpackagelater{fancyhdr}{2019/03/21}{%
+\IfPackageAtLeastTF{fancyhdr}{2019/03/21}{%
   \DeclarePageStyleByLayers[
     onselect={\def\@mkboth{\protect\markboth}},
   ]{f@nch@fancycore}{%

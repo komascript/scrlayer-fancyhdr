@@ -1,5 +1,5 @@
 \input regression-test.tex
-\documentclass{article}
+\documentclass[twoside]{article}
 
 \usepackage{scrlayer-fancyhdr}
 \DeclareNewLayer[%

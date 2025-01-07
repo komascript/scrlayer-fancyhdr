@@ -716,7 +716,8 @@
 %   \texttt{fancy.head.odd} und \texttt{fancy.head.even} mit Hilfe von
 %   \opt{addvoffset} behoben werden. Weitere Tests sind hier erforderlich.
 % \item
-%   Noch nicht alle neuen Möglichkeiten von \pkg{fancyhdr} v5 sind getested.
+%   Die neuen Möglichkeiten von \pkg{fancyhdr} v5 sind weitgehend weder
+%   unterstützt noch gar getestet.
 % \end{itemize}
 % Siehe \url{https://github.com/komascript/scrlayer-fancyhdr/issues} für
 % weitere bekannte Probleme.
@@ -800,6 +801,7 @@
 % four layers (even side head, odd side head, even side foot, odd side foot).
 % \changes{v0.3}{2025-01-07}{\cs{f@nch@head} and \cs{f@nch@foot} have 8
 %   arguments with \pkg{fancyhdr} v5}
+% \changes{v0.3.1}{2025-01-07}{missing backslashs added}
 %    \begin{macrocode}
 %<*body>
 \IfPackageAtLeastTF{fancyhdr}{2025/01/01}{%
@@ -815,8 +817,8 @@
     background,evenpage,
     head,
     contents={\hb@xt@ \layerwidth{%
-        f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
-                  \f@nch@width@elh\f@nch@width@ech\f@nch@width@erh
+        \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
+                   \f@nch@width@elh\f@nch@width@ech\f@nch@width@erh
     }}
   ]{fancy.head.even}
   \DeclareNewLayer[%
@@ -831,7 +833,7 @@
     foreground,evenpage,
     foot,
     contents={\hb@xt@ \layerwidth{%
-        f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
+        \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
         \f@nch@width@elf\f@nch@width@ecf\f@nch@width@erf
     }}
   ]{fancy.foot.even}
@@ -940,7 +942,7 @@
 
 %%% Local Variables:
 %%% mode: doctex
-%%% mode: flyspell
-%%% ispell-local-dictionary: "en_GB"
+%%% eval: (flyspell-mode 1)
+%%% ispell-local-dictionary: "en_US"
 %%% TeX-master: t
 %%% End:

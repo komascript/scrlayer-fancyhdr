@@ -2,10 +2,14 @@
 
 ------------------------------------------------------------------------------
 
-LaTeX package `scrlayer-fancyhdr`  
-Copyright (c) 2008—2022 Markus Kohm  
-Release: 2025-01-07 v0.3.1  
-License: LPPL 1.3c (see LICENSE.md)  
+LaTeX package `scrlayer-fancyhdr`
+
+Copyright (c) 2008—2025 Markus Kohm
+
+Release: 2025-01-08 v0.3.1
+
+License: LPPL 1.3c (see LICENSE.md)
+
 CTAN Location: https://ctan.org/pkg/scrlayer-fancyhdr
 
 ------------------------------------------------------------------------------
@@ -22,7 +26,10 @@ Before KOMA-Script v3.33 `scrlayer-fancyhdr` was part of KOMA-Script itself.
 It still depends on KOMA-Script package
 [`scrlayer`](https://www.ctan.org/pkg/scrlayer) at least version 3.33.  It
 also depends on [`fancyhdr`](https://www.ctan.org/pkg/fancyhdr). Currently
-version 3 and 4 up to 4.0.1 are supported and tested.
+version 3 and 4 up to 4.0.1 are supported and tested. Basic functionality also
+works with version 5 and has been tested up to 5.1. But several new features
+of [`fancyhdr`](https://www.ctan.org/pkg/fancyhdr) version 5 are currently not
+tested with `scrlayer-fancyhdr`.
 
 ## Status
 

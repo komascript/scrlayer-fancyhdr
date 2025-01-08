@@ -2,7 +2,7 @@
 
 --[[
   Build script for scrlayer-fancyhdr project
-  Copyright (c) 2021–2022 Markus Kohm
+  Copyright (c) 2021–2025 Markus Kohm
 
   This file is part of the build system of scrlayer-fancyhdr.
 
@@ -14,7 +14,7 @@
     https://www.latex-project.org/lppl.txt
 ]]
 
-release_info = "2025-01-07 v0.3.1"
+release_info = "2025-01-08 v0.3.1"
 -- Bundle and modules
 
 module       = "scrlayer-fancyhdr"

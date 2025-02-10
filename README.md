@@ -6,7 +6,7 @@ LaTeX package `scrlayer-fancyhdr`
 
 Copyright (c) 2008—2025 Markus Kohm
 
-Release: 2025-01-08 v0.3.1
+Release: 2025-02-10 v0.4
 
 License: LPPL 1.3c (see LICENSE.md)
 

@@ -32,7 +32,7 @@
 %</dtx>
 %<package&identify>\ProvidesPackage{scrlayer-fancyhdr}
 %<*dtx|(package&identify)>
-  [2025-01-08 v0.3.1
+  [2025-02-10 v0.4
 %</dtx|(package&identify)>
 %<*dtx>              
     source of package scrlayer-scrpage]
@@ -802,70 +802,103 @@
 % \changes{v0.3}{2025-01-07}{\cs{f@nch@head} and \cs{f@nch@foot} have 8
 %   arguments with \pkg{fancyhdr} v5}
 % \changes{v0.3.1}{2025-01-07}{missing backslashs added}
+% \changes{v0.4}{2025-02-10}{\cs{f@nch@head} and \cs{f@nch@foot} have 6
+%   arguments with \pkg{fancyhdr} v5.2}
 %    \begin{macrocode}
 %<*body>
-\IfPackageAtLeastTF{fancyhdr}{2025/01/01}{%
+\IfPackageAtLeastTF{fancyhdr}{2025/02/07}{%
   \DeclareNewLayer[%
     background,oddpage,
     head,
     contents={\hb@xt@ \layerwidth{%
-        \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
-                   \f@nch@width@olh\f@nch@width@och\f@nch@width@orh
-    }}
+        \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh{o}%
+    }}%
   ]{fancy.head.odd}
   \DeclareNewLayer[%
     background,evenpage,
     head,
     contents={\hb@xt@ \layerwidth{%
-        \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
-                   \f@nch@width@elh\f@nch@width@ech\f@nch@width@erh
-    }}
+        \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh{e}%
+    }}%
   ]{fancy.head.even}
   \DeclareNewLayer[%
     foreground,oddpage,
     foot,
     contents={\hb@xt@ \layerwidth{%
-        \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
-                   \f@nch@width@olf\f@nch@width@ocf\f@nch@width@orf
-    }}
+        \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf{o}%
+    }}%
   ]{fancy.foot.odd}
   \DeclareNewLayer[%
     foreground,evenpage,
     foot,
     contents={\hb@xt@ \layerwidth{%
-        \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
-        \f@nch@width@elf\f@nch@width@ecf\f@nch@width@erf
-    }}
+        \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf{e}%
+    }}%
   ]{fancy.foot.even}
 }{%
-  \DeclareNewLayer[%
-    background,oddpage,
-    head,
-    contents={\hb@xt@ \layerwidth{%
-        \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
-    }}
-  ]{fancy.head.odd}
-  \DeclareNewLayer[%
-    background,evenpage,
-    head,
-    contents={\hb@xt@ \layerwidth{%
-        \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
-    }}
-  ]{fancy.head.even}
-  \DeclareNewLayer[%
-    foreground,oddpage,
-    foot,
-    contents={\hb@xt@ \layerwidth{%
-        \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
-    }}
-  ]{fancy.foot.odd}
-  \DeclareNewLayer[%
-    foreground,evenpage,
-    foot,
-    contents={\hb@xt@ \layerwidth{%
-        \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
-    }}
-  ]{fancy.foot.even}
+  \IfPackageAtLeastTF{fancyhdr}{2025/01/01}{%
+    \DeclareNewLayer[%
+      background,oddpage,
+      head,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
+                     \f@nch@width@olh\f@nch@width@och\f@nch@width@orh
+      }}
+    ]{fancy.head.odd}
+    \DeclareNewLayer[%
+      background,evenpage,
+      head,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
+                     \f@nch@width@elh\f@nch@width@ech\f@nch@width@erh
+      }}
+    ]{fancy.head.even}
+    \DeclareNewLayer[%
+      foreground,oddpage,
+      foot,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
+                     \f@nch@width@olf\f@nch@width@ocf\f@nch@width@orf
+      }}
+    ]{fancy.foot.odd}
+    \DeclareNewLayer[%
+      foreground,evenpage,
+      foot,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
+          \f@nch@width@elf\f@nch@width@ecf\f@nch@width@erf
+      }}
+    ]{fancy.foot.even}
+  }{%
+    \DeclareNewLayer[%
+      background,oddpage,
+      head,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@head\f@nch@Oolh\f@nch@olh\f@nch@och\f@nch@orh\f@nch@Oorh
+      }}
+    ]{fancy.head.odd}
+    \DeclareNewLayer[%
+      background,evenpage,
+      head,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@head\f@nch@Oelh\f@nch@elh\f@nch@ech\f@nch@erh\f@nch@Oerh
+      }}
+    ]{fancy.head.even}
+    \DeclareNewLayer[%
+      foreground,oddpage,
+      foot,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@foot\f@nch@Oolf\f@nch@olf\f@nch@ocf\f@nch@orf\f@nch@Oorf
+      }}
+    ]{fancy.foot.odd}
+    \DeclareNewLayer[%
+      foreground,evenpage,
+      foot,
+      contents={\hb@xt@ \layerwidth{%
+          \f@nch@foot\f@nch@Oelf\f@nch@elf\f@nch@ecf\f@nch@erf\f@nch@Oerf
+      }}
+    ]{fancy.foot.even}
+  }%
 }
 %    \end{macrocode}
 % \begin{ipgstyle}{f@nch@fancycore}
